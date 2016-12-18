@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SICD.Models.GuestList>
+
+@{
+    ViewBag.Title = "Attendees List";
+}
+
+<h2>Guest List</h2>
+@if (Request.IsAuthenticated)
+{
+@Html.Raw(ViewBag.Msg) <!--raw: biar html nya keolah, ga di pt=rint-->
+}
+@if (Request.IsAuthenticated)
+{
+<p>
+    @Html.ActionLink("Add Guest", "Create")
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestMsg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Attendee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuestName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuestMsg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attendee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @if (item.email== User.Identity.Name)
+            {
+            @Html.ActionLink("Delete", "Delete", new { id = item.ListID })
+            }
+        </td>
+    </tr>
+}
+
+</table>

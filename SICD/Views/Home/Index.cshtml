@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "SICD";
+}
+
+<div class="row" style="text-align:center">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" style="text-align:center">
+        <img src="~/Content/BG1.jpg" height="540" class="img-responsive" />
+        
+        @if (Request.IsAuthenticated)
+        {
+            <a class="btn btn-gold text-center btn-default" href="/Guest/Create"><b>Attend</b></a>
+        }
+        else
+        {
+            <a class="btn btn-gold text-center btn-default" href="/Account/Login"><b>Attend</b></a>
+            //@Html.ActionLink("Attend", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        }
+    </div>
+</div>
+
