@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using SICD.DAL;
 using SICD.Models;
+using System.Data.SqlClient;
 
 namespace SICD.DAL
 {
@@ -25,6 +26,11 @@ namespace SICD.DAL
 
         public GuestList GetDataByID(int lstID)
         {
+
+            var sql = "SELECT * FROM Guest where GuestId = ";
+            var  command = new SqlCommand(sql);
+            command.Parameters.AddWithValue("@0", lstID);
+            command.ExecuteReader();
             var res = (from g in db.GuestLists where g.ListID == lstID select g).SingleOrDefault();
             return res;
         }
@@ -37,6 +43,7 @@ namespace SICD.DAL
         {
             try
             {
+               
                 db.GuestLists.Add(obj);
                 db.SaveChanges();
             }
@@ -45,6 +52,10 @@ namespace SICD.DAL
 
                 throw new Exception(ex.Message);
             }
+        }
+        public void Tambah(GuestList obj)
+        {
+
         }
         public void Delete(int lstId)
         {

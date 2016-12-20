@@ -20,7 +20,7 @@ namespace SICD.Controllers
                     ViewBag.msg = TempData["Message"].ToString();
                 }
                 var ss = gl.Count();
-                ViewBag.msg = ss.ToString();
+                //ViewBag.msg = ss.ToString();
                 return View(gl);
             }
         }
@@ -81,25 +81,26 @@ namespace SICD.Controllers
         }
 
         // GET: Guest/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+
 
         // POST: Guest/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        public ActionResult Delete(int id)
+        {
+            using (GuestVM serv = new GuestVM())
+                try
+                {
+                    // TODO: Add delete logic here
+                    serv.Delete(id);
+                    
+                    
+                }
+                catch
+                {
+                    
+                    
+                }
+            return RedirectToAction("Index");
         }
     }
 }
